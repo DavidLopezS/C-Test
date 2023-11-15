@@ -1,4 +1,4 @@
-#include <iostream>
+#include "header.hpp"
 
 std::string reverseString(const std::string &string){
     return std::string(string.rbegin(), string.rend());
@@ -24,54 +24,40 @@ bool isPalindrome(const std::string &palindrome){
         return false;
 }
 
-
-int videogameManager(){
-	int choice = -1;
-	while (choice == -1) {
-		std::cout << "\n1) Add new videogame\n"
-			"2) List videogames by ID\n"
-			"3) Search videogame\n"
-			"4) List videogames ordered by genre\n"
-			"5) List videogames ordered by name\n"
-			"6) List videogmaes ordered by time played\n"
-			"7) List videogames ordered by studio name\n"
-			"8) Add time played\n"
-			"9) Add achievements\n"
-			"10) Delete videogame from list\n"
-			"11) Back\n"
-			"12) Exit\n"
-			"Enter your choice:";
-		std::cin >> choice;
-		if (std::cin.fail()) {
-			std::cout << "That's not a number bro... :(" << std::endl;
-			break;
-		}
-
-		if (!(1 <= choice && choice <= 13)) {
-			std::cout << "\nInvalid choice. Try again!\n";
-			choice = -1;
-		}
-	}
-	return choice;
-}
-
-int menu(){
+int selector(){
 	int choice = -1;
 	while (choice == -1) {
 		std::cout << "\n1) Exercice 1\n"
 			"2) Exercice 2\n"
 			"3) Exercice 3\n"
-			"4) Exit\n"
+			"4) Exercice 4\n"
+			"5) Exercice \n"
+			"6) Exit\n"
 			"Enter your choice:";
 		std::cin >> choice;
 		if (std::cin.fail()) 
 			std::cout << "That's not a number bro... :(" << std::endl;
-		if (!(1 <= choice && choice <= 4)) {
+		if (!(1 <= choice && choice <= 6)) {
 			std::cout << "\nInvalid choice. Try again!\n";
 			choice = -1;
 		}
 	}
 	return choice;
+} 
+
+void smartPointersExercice(){
+	std::shared_ptr<Book> bookOne = std::make_shared<Book>("BookOne", "Author One");
+	std::shared_ptr<Book> bookTwo = std::make_shared<Book>("BookTwo", "Author Two");
+	std::shared_ptr<Book> bookThree = std::make_shared<Book>("BookThree", "Author Three");
+
+	std::vector<std::shared_ptr<Book>> bookList;
+	bookList.push_back(bookOne);
+	bookList.push_back(bookTwo);
+	bookList.push_back(bookThree);
+	
+	for(const auto& book : bookList){
+		book->displayBookInfo();
+	}
 }
 
 void run() {
@@ -80,7 +66,7 @@ void run() {
     std::string palindrome;
 
 	while (true) {
-		int choice = menu();
+		int choice = selector();
 		switch (choice) {
 			case 1:
                 //Exercice 1
@@ -109,6 +95,12 @@ void run() {
                     break;
                 }
 			case 4:
+				std::cout << "Exercice 4. Smart pointers handling" << std::endl;
+				smartPointersExercice();
+				break;
+			case 5:
+				break;
+			case 6:
 				std::cout << "See ya!" << std::endl;
 				return;
 			default:
